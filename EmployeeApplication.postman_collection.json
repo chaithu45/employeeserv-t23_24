@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "37bd75b3-5280-4144-b598-f8a85bad0281",
+		"name": "EmployeeApplication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "positive scenarios",
+			"item": [
+				{
+					"name": "create Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"first_name\":\"Vicky\",\r\n    \"last_name\":\"Kumar\",\r\n    \"date_of_birth\":\"1994-25-12\",\r\n    \"address\":{\r\n        \"line1\":\"Bridge Street\",\r\n        \"line2\":\"KPT street\",\r\n        \"city\":\"Bangalore\",\r\n        \"state\":\"KA\",\r\n        \"country\":\"India\",\r\n        \"zip_code\":\"560066\"\r\n    }\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Employee without address line 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"first_name\":\"Lucky\",\r\n    \"last_name\":\"Kumar\",\r\n    \"date_of_birth\":\"1994-25-12\",\r\n    \"address\":{\r\n        \"line1\":\"Bridge Street\",\r\n        \"city\":\"Bangalore\",\r\n        \"state\":\"KA\",\r\n        \"country\":\"India\",\r\n        \"zip_code\":\"560066\"\r\n    }\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "negative scenarios",
+			"item": [
+				{
+					"name": "create Employee with same Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"  pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"first_name\": \"Vicky\",\r\n    \"last_name\": \"Kumar\",\r\n    \"date_of_birth\": \"1996-01-12T00:00:00.000+0000\",\r\n    \"address\": {\r\n        \"line1\": \"Bridge Street\",\r\n        \"line2\": \"KPT street\",\r\n        \"city\": \"Bangalore\",\r\n        \"state\": \"KA\",\r\n        \"country\": \"India\",\r\n        \"zip_code\":\"516547\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Employee without DOB",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"first_name\":\"Lucky\",\r\n    \"last_name\":\"Kumar\",\r\n    \"address\":{\r\n        \"line1\":\"Bridge Street\",\r\n        \"city\":\"Bangalore\",\r\n        \"state\":\"KA\",\r\n        \"country\":\"India\",\r\n        \"zip_code\":\"560066\"\r\n    }\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Employee without few address fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"first_name\":\"Lucky\",\r\n    \"last_name\":\"Kumar\",\r\n    \"date_of_birth\":\"1994-25-12\",\r\n    \"address\":{\r\n        \"line1\":\"Bridge Street\"\r\n    }\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Employee without LastName & address fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"first_name\":\"Lucky\",\r\n    \"address\":{\r\n        \"line1\":\"Bridge Street\",\r\n        \"city\":\"Bangalore\"\r\n    }\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeById(not exist in DB)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees/566",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees",
+								"566"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeById(invalid emp id)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees/566abc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees",
+								"566abc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Employee (not supported)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {\r",
+									"  pm.response.to.have.status(405);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"first_name\":\"Lucky\",\r\n    \"last_name\":\"Kumar\",\r\n    \"address\":{\r\n        \"line1\":\"Bridge Street\",\r\n        \"city\":\"Bangalore\",\r\n        \"state\":\"KA\",\r\n        \"country\":\"India\",\r\n        \"zip_code\":\"560066\"\r\n    }\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bfs/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bfs",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
